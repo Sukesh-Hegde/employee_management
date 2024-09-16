@@ -3,17 +3,16 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import About from "./components/About";
-import Alert from "./components/Alert";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
+import EmployeeState from "./context/emplyeeState";
 
 function App() {
   return (
     <>
-      <NoteState>
+      <EmployeeState>
         <Router>
           <Navbar />
-          <Alert />
           <div className="container">
             <Routes>
               <Route exact path="/" element={<Home />} />
@@ -23,7 +22,7 @@ function App() {
             </Routes>
           </div>
         </Router>
-      </NoteState>
+      </EmployeeState>
     </>
   );
 }
