@@ -2,19 +2,16 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
-    let navigate = useNavigate();
+  let navigate = useNavigate();
 
-    useEffect(() => {
-      if (localStorage.getItem("token")) {
-        // getNotes();
-      } else {
-        navigate("/login");
-      }
-      // eslint-disable-next-line
-    }, []);
-  return (
-    <div className="container my-3">
-      <h1>welcome to home</h1>
-    </div>
-  );
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      // getNotes();
+    } else {
+      navigate("/login");
+    }
+  }, []);
+  return <div className="container ">
+    <h2>Crud App with Json Server</h2>
+  </div>;
 }
