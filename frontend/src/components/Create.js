@@ -19,8 +19,18 @@ export default function Create() {
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const handleSubmit = (e) => {
+  e.preventDefault();
+
+  // Check if the email already exists in the users array
+  const isEmailExists = users.some((user) => user.email === email);
+
+  if (isEmailExists) {
+    alert(
+      "A user with this email already exists. Please use a different email."
+    );
+  } else {
+    // Proceed with creating a new user if the email doesn't exist
     const newUser = {
       id: users[users.length - 1].id + 1,
       name,
@@ -32,9 +42,12 @@ export default function Create() {
       image: imageUrl,
       createdDate: currentDate,
     };
+
     dispatch(addUser(newUser));
     navigate("/");
-  };
+  }
+};
+
 
   const handleCourseChange = (e) => {
     const selectedCourse = e.target.value;

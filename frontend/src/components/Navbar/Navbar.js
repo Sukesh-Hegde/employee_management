@@ -1,30 +1,30 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import "./Navbar.css";
 
 export default function Navbar() {
   let navigate = useNavigate();
-
   let location = useLocation();
 
   let handleLogout = () => {
     localStorage.removeItem("token");
-        localStorage.removeItem("name");
+    localStorage.removeItem("name");
 
     navigate("/login");
   };
 
-    let Admin = localStorage.getItem("name");
+  let Admin = localStorage.getItem("name");
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-navbar">
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
             <img
-              src="logo.png" // Replace with your image URL
+              src="logo.png"
               alt="Brand Logo"
               className="navbar-logo"
-              style={{ width: "60px", height: "auto" }} // Inline styles for width and height
+              style={{ width: "60px", height: "auto" }}
             />
           </a>
 
@@ -65,9 +65,9 @@ export default function Navbar() {
               </li>
             </ul>
             {localStorage.getItem("name") ? (
-              <h3 className="" style={{ color: "white", marginRight: "250px" }}>
+              <h6 className="" style={{ color: "white", marginRight: "250px" }}>
                 {Admin}
-              </h3>
+              </h6>
             ) : (
               ""
             )}

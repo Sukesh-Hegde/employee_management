@@ -60,7 +60,7 @@ authRouter.post(
         //  Send token.
         success = true;
 
-        return res.status(200).send({ success, token, name:user.name });
+        return res.status(200).send({ success, token });
       }
 
       res.json(user);
@@ -75,6 +75,7 @@ authRouter.post(
 authRouter.post(
   "/login",
   [
+    body("name", "Enter a valid name").isLength({ min: 3 }),
     body("email", "Enter a valid email").isEmail(),
     body("password", "Password cannot be blank").exists(),
   ],
@@ -86,10 +87,10 @@ authRouter.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { email, password } = req.body;
+    const { name,email, password } = req.body;
     try {
       let user = await User.findOne({ email });
-      if (!user) {
+      if (!user) { 
         return res.status(400).json({
           success,
           error: "Please try to login with correct credentials",
@@ -117,7 +118,7 @@ authRouter.post(
 
       //  Send token.
       success = true;
-      return res.status(200).send({ success, token });
+      return res.status(200).send({ success, token, name: user.name });
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Internal Server Error");

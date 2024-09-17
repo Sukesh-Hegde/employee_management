@@ -137,7 +137,7 @@ export default function Update() {
                 onChange={(e) =>
                   setCourse((prevCourses) =>
                     e.target.checked
-                      ? [...prevCourses, "MCA"]
+                      ? [ "MCA"]
                       : prevCourses.filter((c) => c !== "MCA")
                   )
                 }
@@ -151,7 +151,7 @@ export default function Update() {
                 onChange={(e) =>
                   setCourse((prevCourses) =>
                     e.target.checked
-                      ? [...prevCourses, "BCA"]
+                      ? [ "BCA"]
                       : prevCourses.filter((c) => c !== "BCA")
                   )
                 }
@@ -165,7 +165,7 @@ export default function Update() {
                 onChange={(e) =>
                   setCourse((prevCourses) =>
                     e.target.checked
-                      ? [...prevCourses, "BSC"]
+                      ? [ "BSC"]
                       : prevCourses.filter((c) => c !== "BSC")
                   )
                 }

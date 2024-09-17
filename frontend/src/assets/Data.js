@@ -63,6 +63,6 @@ export const userList = [
     designation: "Manager",
     gender: "F",
     course: "MCA",
-    createdDate: currentDate,
+    createdDate: "2024-12-18",
   },
 ];
