@@ -4,6 +4,8 @@ import { addUser } from "../assets/UserReducer";
 import { useNavigate } from "react-router-dom";
 
 export default function Create() {
+  const currentDate = new Date().toISOString().split("T")[0];
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [mobileNo, setMobileNo] = useState("");
@@ -11,6 +13,7 @@ export default function Create() {
   const [gender, setGender] = useState("");
   const [course, setCourse] = useState([]);
   const [image, setImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
 
   const users = useSelector((state) => state.users);
   const dispatch = useDispatch();
@@ -26,7 +29,8 @@ export default function Create() {
       designation,
       gender,
       course,
-      image,
+      image: imageUrl,
+      createdDate: currentDate,
     };
     dispatch(addUser(newUser));
     navigate("/");
@@ -44,7 +48,12 @@ export default function Create() {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file && (file.type === "image/jpeg" || file.type === "image/png")) {
-      setImage(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(file);
+        setImageUrl(reader.result); 
+      };
+      reader.readAsDataURL(file);
     } else {
       alert("Please select a valid image file (jpg/png)");
     }
@@ -156,6 +165,13 @@ export default function Create() {
               className="form-control"
               onChange={handleImageChange}
             />
+            {imageUrl && (
+              <img
+                src={imageUrl}
+                alt="Preview"
+                style={{ marginTop: "10px", width: "100px", height: "100px" }}
+              />
+            )}
           </div>
           <br />
           <button className="btn btn-info">Submit</button>

@@ -17,9 +17,15 @@ export default function Navbar() {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
-            Employee
-          </Link>
+          <a className="navbar-brand" href="/">
+            <img
+              src="logo.png" // Replace with your image URL
+              alt="Brand Logo"
+              className="navbar-logo"
+              style={{ width: "60px", height: "auto" }} // Inline styles for width and height
+            />
+          </a>
+
           <button
             className="navbar-toggler"
             type="button"

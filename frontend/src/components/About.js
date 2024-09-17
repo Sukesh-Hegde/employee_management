@@ -10,13 +10,12 @@ export default function About() {
 
       <main className="container my-5">
         <section className="mb-5">
-          <h2>Note-Keeper</h2>
+          <h2>Employee-Management</h2>
           <p>
-            The Note-Keeper is a full-stack web application designed to provide
-            users with a secure and convenient way to manage their notes. Built
-            using the MERN stack (MongoDB, Express.js, React, Node.js), this
-            application allows users to create, update, delete, and share notes
-            with ease.
+            "This project is a dynamic web application that integrates a user
+            management system with CRUD operations, user authentication, and an
+            interactive interface, allowing users to manage their profiles and
+            view data seamlessly."
           </p>
         </section>
 
@@ -60,7 +59,8 @@ export default function About() {
             to hear from you!
           </p>
           <p>
-            Email: <a href="mailto:info@example.com">sukeshhegde994591@gmail.com</a>
+            Email:{" "}
+            <a href="mailto:info@example.com">sukeshhegde994591@gmail.com</a>
           </p>
           <p>Phone: (123) 456-7890</p>
         </section>
