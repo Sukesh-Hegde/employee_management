@@ -21,28 +21,36 @@ const Signup = () => {
     e.preventDefault();
     const { name, email, password } = credential;
 
-    const response = await fetch(`${host}/api/auth/createuser`, {
+    const response = await fetch(`${host}/api/auth/createUser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: name,
+        name:name,
         email: email,
         password: password,
       }),
     });
+
     const json = await response.json();
+    console.log(json);
+    
 
     if (json.success) {
-      localStorage.setItem("token", json.token);
+      // Save the token and the name in localStorage
+      localStorage.setItem("token", json.token); // Assuming a token is returned
+      localStorage.setItem("name", json.name); // Storing the name directly
 
-      navigate("/login");
-      showAlert("Account Created Successfully", "success");
+      // Navigate to the desired page after login
+      navigate("/");
+      showAlert("Signed in Successfully", "success");
     } else {
-      showAlert("Invalid credential", "danger");
+      // Show error alert
+      showAlert("Invalid credentials", "danger");
     }
   };
+
 
   const onChange = (e) => {
     setCredentials({ ...credential, [e.target.name]: e.target.value });

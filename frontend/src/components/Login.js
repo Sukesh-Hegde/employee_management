@@ -32,10 +32,10 @@ const Login = () => {
       //save the token and redirect
       localStorage.setItem("token", json.token);
 
-      // showAlert("Logged in Successfully", "success");
+      showAlert("Logged in Successfully", "success");
       navigate("/");
-    // } else {
-    //   showAlert("Invalid Details", "danger");
+    } else {
+      showAlert("Invalid Details", "danger");
     }
   };
 

@@ -90,7 +90,8 @@ const EmployeeState = (props) => {
   return (
     <EmployeeContext.Provider
       value={{
-
+        alert,
+        showAlert
       }}
     >
       {props.children}

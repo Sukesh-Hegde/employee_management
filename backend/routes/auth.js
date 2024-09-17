@@ -8,9 +8,9 @@ import jwt from "jsonwebtoken";
 
 // ROUTE 1: Create a User using: POST "/api/auth/createUser". No login required
 authRouter.post(
-  "/createuser",
+  "/createUser",
 
-  body("name", "Enter a valid name").isLength({ min: 3 }),
+  body("name", "Enter a valid name").isLength({ min:3 }),
   body("email", "Enter a valid email").isEmail(),
   body("password", "Password must be at least 5 characters").isLength({
     min: 5,
@@ -26,15 +26,15 @@ authRouter.post(
     }
 
     try {
+      console.log("create user");
+
       // Check whether the user with this email exists already
       let user = await User.findOne({ email: req.body.email });
       if (user) {
-        return res
-          .status(400)
-          .json({
-            success,
-            error: "Sorry, a user with this email already exists",
-          });
+        return res.status(400).json({
+          success,
+          error: "Sorry, a user with this email already exists",
+        });
       }
       //hashing password
       const pass = req.body.password;
@@ -60,7 +60,7 @@ authRouter.post(
         //  Send token.
         success = true;
 
-        return res.status(200).send({ success, token });
+        return res.status(200).send({ success, token, name:user.name });
       }
 
       res.json(user);

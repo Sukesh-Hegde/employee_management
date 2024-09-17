@@ -1,15 +1,17 @@
-import React  from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import React from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
-    let navigate = useNavigate();
+  let navigate = useNavigate();
 
   let location = useLocation();
 
-  let handleLogout=()=>{
-    localStorage.removeItem('token')
-    navigate('/login')
-  }
+  let handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
+    let Admin = localStorage.getItem("name");
 
   return (
     <div>
@@ -54,15 +56,36 @@ export default function Navbar() {
                 </Link>
               </li>
             </ul>
-            {!localStorage.getItem('token')?
-            <form className="d-flex " role="search">
-              <Link className="btn btn-primary mx-2" to="/login" role="button">
-                Login
-              </Link>
-              <Link className="btn btn-primary mx-2" to="/signup" role="button">
-                SignUp
-              </Link>
-            </form>: <button className='btn btn-primary' onClick={handleLogout}>Logout</button> }
+            {localStorage.getItem("name") ? (
+              <h3 className="" style={{ color: "white", marginRight: "250px" }}>
+                {Admin}
+              </h3>
+            ) : (
+              ""
+            )}
+
+            {!localStorage.getItem("token") ? (
+              <form className="d-flex " role="search">
+                <Link
+                  className="btn btn-primary mx-2"
+                  to="/login"
+                  role="button"
+                >
+                  Login
+                </Link>
+                <Link
+                  className="btn btn-primary mx-2"
+                  to="/signup"
+                  role="button"
+                >
+                  SignUp
+                </Link>
+              </form>
+            ) : (
+              <button className="btn btn-primary" onClick={handleLogout}>
+                Logout
+              </button>
+            )}
           </div>
         </div>
       </nav>
