@@ -8,6 +8,8 @@ export default function Navbar() {
 
   let handleLogout = () => {
     localStorage.removeItem("token");
+        localStorage.removeItem("name");
+
     navigate("/login");
   };
 
