@@ -6,24 +6,24 @@ import { updateUser } from "../assets/UserReducer";
 export default function Update() {
   const { id } = useParams();
   const users = useSelector((state) => state.users);
-  const existingUser = users.filter((f) => f.id == id);
-  const { name, email, mobileNo, designation, gender, course } =
-    existingUser[0];
+  const existingUser = users.find((user) => user.id == id);
+  const { name, email, mobileNo, designation, gender, course, image } =
+    existingUser || {};
 
-  const [uname, setName] = useState(name);
-  const [uemail, setEmail] = useState(email);
-  const [umobileNo, setMobileNo] = useState(mobileNo);
-  const [udesignation, setDesignation] = useState(designation);
-  const [ugender, setGender] = useState(gender);
-  const [ucourse, setCourse] = useState(course);
-  const [image, setImage] = useState(null);
+  const [uname, setName] = useState(name || "");
+  const [uemail, setEmail] = useState(email || "");
+  const [umobileNo, setMobileNo] = useState(mobileNo || "");
+  const [udesignation, setDesignation] = useState(designation || "");
+  const [ugender, setGender] = useState(gender || "");
+  const [ucourse, setCourse] = useState(course || []);
+  const [newImage, setNewImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState(image || "");
 
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    // Handle file uploads if necessary
     const formData = {
       id,
       name: uname,
@@ -32,14 +32,24 @@ export default function Update() {
       designation: udesignation,
       gender: ugender,
       course: ucourse,
-      image, // You can handle image file upload separately as needed
+      image: newImage ? imageUrl : image, // Keep existing image if not updated
     };
     dispatch(updateUser(formData));
     navigate("/");
   };
 
   const handleFileChange = (e) => {
-    setImage(e.target.files[0]);
+    const file = e.target.files[0];
+    if (file && (file.type === "image/jpeg" || file.type === "image/png")) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setNewImage(file);
+        setImageUrl(reader.result);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      alert("Please select a valid image file (jpg/png)");
+    }
   };
 
   return (
@@ -125,10 +135,10 @@ export default function Update() {
                 value="MCA"
                 checked={ucourse.includes("MCA")}
                 onChange={(e) =>
-                  setCourse(
+                  setCourse((prevCourses) =>
                     e.target.checked
-                      ? [...ucourse, "MCA"]
-                      : ucourse.filter((c) => c !== "MCA")
+                      ? [...prevCourses, "MCA"]
+                      : prevCourses.filter((c) => c !== "MCA")
                   )
                 }
               />
@@ -139,10 +149,10 @@ export default function Update() {
                 value="BCA"
                 checked={ucourse.includes("BCA")}
                 onChange={(e) =>
-                  setCourse(
+                  setCourse((prevCourses) =>
                     e.target.checked
-                      ? [...ucourse, "BCA"]
-                      : ucourse.filter((c) => c !== "BCA")
+                      ? [...prevCourses, "BCA"]
+                      : prevCourses.filter((c) => c !== "BCA")
                   )
                 }
               />
@@ -153,10 +163,10 @@ export default function Update() {
                 value="BSC"
                 checked={ucourse.includes("BSC")}
                 onChange={(e) =>
-                  setCourse(
+                  setCourse((prevCourses) =>
                     e.target.checked
-                      ? [...ucourse, "BSC"]
-                      : ucourse.filter((c) => c !== "BSC")
+                      ? [...prevCourses, "BSC"]
+                      : prevCourses.filter((c) => c !== "BSC")
                   )
                 }
               />
@@ -172,6 +182,13 @@ export default function Update() {
               className="form-control"
               onChange={handleFileChange}
             />
+            {imageUrl && (
+              <img
+                src={imageUrl}
+                alt="Preview"
+                style={{ marginTop: "10px", width: "100px", height: "100px" }}
+              />
+            )}
           </div>
           <br />
           <button className="btn btn-info">Submit</button>
