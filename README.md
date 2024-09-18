@@ -1,4 +1,7 @@
 # Employee Management System (MERN Stack)
+
+explainatin video Link : https://youtu.be/_Ht93vyjG9g
+
 This project is an Employee Management System developed using the MERN stack (MongoDB, Express, React, Node.js). The system allows users to manage employee information with features such as create, read, update, and delete (CRUD). It also supports authentication using JWT for secure login and user sessions.
 
 ## Features

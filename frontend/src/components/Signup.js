@@ -38,8 +38,6 @@ const Signup = () => {
     
 
     if (json.success) {
-      localStorage.setItem("token", json.token); 
-
       navigate("/login");
       showAlert("Signed in Successfully", "success");
     } else {
