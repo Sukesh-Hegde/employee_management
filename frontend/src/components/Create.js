@@ -30,7 +30,6 @@ const handleSubmit = (e) => {
       "A user with this email already exists. Please use a different email."
     );
   } else {
-    // Proceed with creating a new user if the email doesn't exist
     const newUser = {
       id: users[users.length - 1].id + 1,
       name,

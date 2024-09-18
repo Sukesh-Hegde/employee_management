@@ -32,7 +32,7 @@ export default function Update() {
       designation: udesignation,
       gender: ugender,
       course: ucourse,
-      image: newImage ? imageUrl : image, // Keep existing image if not updated
+      image: newImage ? imageUrl : image, 
     };
     dispatch(updateUser(formData));
     navigate("/");
